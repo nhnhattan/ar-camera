@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Camera</title>
+    <link rel="stylesheet" href="all.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    st
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="camera-wrapper" id="camera-wrapper">
+        <button class="toggle-camera-button" id="toggleCameraButton">
+          <i class="fas fa-video"></i>
+        </button>
+        <video id="videoElement" autoplay></video>
+        <div class="button-wrapper">
+          <button class="upload-button" id="uploadButton">
+            <i class="fa-solid fa-file-import"></i>
+          </button>
+          <input type="file" id="fileInput" accept="image/*,video/*" />
+          <div class="camera-container">
+            <div class="camera-button" id="cameraButton">
+              <div class="time-counter" id="timeCounter">0s</div>
+            </div>
+          </div>
+
+          <button class="switch-camera-button" id="switchCameraButton">
+            <i class="fa-solid fa-camera-rotate"></i>
+          </button>
+        </div>
+      </div>
+      <div class="display" id="displayArea" style="display: none;"></div>
+      <button class="close-camera-button" id="closeDisplayButton">Close</button>
+    </div>
+    <script src="all.js"></script>
+  </body>
+</html>
