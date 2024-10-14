@@ -6,8 +6,8 @@ let isHolding = false;
 let timer;
 let seconds = 0;
 let facingMode = "user"; // Default to user (front) camera
-let isCameraStopped = false; // Check camera state
-let isCameraTurnedOff = false; // Check if the camera was turned off by the toggle button
+let isCameraStopped = false;
+let isCameraTurnedOff = false;
 
 // Function to start video stream
 function startVideoStream() {
@@ -31,13 +31,11 @@ startVideoStream();
 $("#cameraButton").on("mousedown touchstart", function () {
   isHolding = true;
   $("#timeCounter").text("0s");
-
-  // Differentiate between click and hold
   timer = setTimeout(function () {
     if (isHolding) {
       startRecording();
     }
-  }, 500); // Hold for 500ms to start recording
+  }, 500);
 });
 
 // Stop recording or take a photo on button release
@@ -70,7 +68,7 @@ function startRecording() {
     seconds++;
     $("#timeCounter").text(seconds + "s");
     if (seconds >= 20) {
-      stopRecording(); // Stop after 20 seconds
+      stopRecording();
     }
   }, 1000);
 }
@@ -85,12 +83,10 @@ function stopRecording() {
     const videoBlob = new Blob(chunks, { type: "video/webm" });
     const videoURL = URL.createObjectURL(videoBlob);
     $("#displayArea").html('<video controls src="' + videoURL + '"></video>');
-
-    // Hide camera and show display area
     $("#videoElement").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
-    $("#closeDisplayButton").show(); // Show the "Close" button
+    $("#closeDisplayButton").show(); 
   };
 }
 
@@ -106,17 +102,14 @@ function capturePhoto() {
 
   const imageURL = canvas.toDataURL("image/png");
   $("#displayArea").html('<img src="' + imageURL + '" alt="Captured Image">');
-
-  // Hide camera and show display area
   $("#videoElement").hide();
   $("#displayArea").show();
-  $("#closeDisplayButton").show(); // Show the "Close" button
+  $("#closeDisplayButton").show(); 
   $("#toggleCameraButton").hide();
 }
 
-// Upload file from user's device
 $("#uploadButton").on("click", function () {
-  $("#fileInput").click(); // Trigger hidden file input
+  $("#fileInput").click(); 
 });
 
 $("#fileInput").on("change", function () {
@@ -130,14 +123,12 @@ $("#fileInput").on("change", function () {
     } else if (file.type.startsWith("video/")) {
       $("#displayArea").html('<video controls src="' + fileURL + '"></video>');
     }
-
-    // Hide camera and show display area
     $("#videoElement").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
-    $("#closeDisplayButton").show(); // Show the "Close" button
+    $("#closeDisplayButton").show(); 
   }
-  $("#fileInput").val(""); // Reset file input
+  $("#fileInput").val(""); 
 });
 
 // Switch camera between front and rear
@@ -164,8 +155,8 @@ $("#toggleCameraButton").on("click", function () {
 
 // Close display button to hide display and show video again
 $("#closeDisplayButton").on("click", function () {
-  $(this).hide(); // Hide close button
+  $(this).hide(); 
   $("#toggleCameraButton").show();
-  $("#displayArea").hide(); // Hide display area
-  $("#videoElement").show(); // Show camera video again
+  $("#displayArea").hide(); 
+  $("#videoElement").show();
 });
