@@ -96,8 +96,6 @@ body {
 .display {
   width: 100vw;
   height: auto;
-  background-color: #ddd;
-  border: 2px solid #999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,6 +107,7 @@ body {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border: none;
   position: relative;
 }
 
