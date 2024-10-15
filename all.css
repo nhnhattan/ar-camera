@@ -64,6 +64,13 @@ body {
   color: black;
 }
 
+
+.camera-button:focus, .camera-button:active, .camera-container:focus, .camera-container:active {
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .progress {
   width: 120%; /* Outer circle size */
   height: 120%; /* Outer circle size */
