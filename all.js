@@ -70,6 +70,7 @@ function startRecording() {
     seconds++;
     $("#timeCounter").text(seconds + "/" + maxRecordingTime);
     const offset = 314 - (seconds / maxRecordingTime) * 314;
+    $(".progress circle").css("stroke", "rgb(253, 0, 0)")
     $(".progress circle").css({
       "stroke-dashoffset": 0,
       transition: "stroke-dashoffset 20s linear",
@@ -95,7 +96,10 @@ function stopRecording() {
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
     $("#closeDisplayButton").show();
+
     $(".progress circle").css("stroke-dashoffset", 314); // Reset progress
+    $(".progress circle").css("stroke", "none")
+
     $(".button-wrapper").hide();
     $("#timeCounter").text("");
   };

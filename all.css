@@ -77,7 +77,7 @@ body {
 
 .progress circle {
   fill: none;
-  stroke: rgb(253, 0, 0); /* Stroke color */
+  stroke: none; /* Stroke color */
   stroke-width: 12px; /* Stroke width */
   stroke-dasharray: 314; /* Circumference of the circle */
   stroke-dashoffset: 314; /* Start hidden */
