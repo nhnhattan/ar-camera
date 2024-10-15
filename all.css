@@ -126,7 +126,7 @@ body {
   align-items: center;
   justify-content: space-around;
   position: absolute;
-  bottom: 8%;
+  bottom: 10%;
 }
 
 /* Video preview */
@@ -196,7 +196,7 @@ body {
 #closeDisplayButton {
   display: none;
   position: absolute;
-  bottom: 2%;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   background-color: red;
