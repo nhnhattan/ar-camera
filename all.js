@@ -8,6 +8,7 @@ let seconds = 0;
 let facingMode = "user"; // Default to user (front) camera
 let isCameraStopped = false;
 let isCameraTurnedOff = false;
+const maxRecordingTime = 20;
 
 // Function to start video stream
 function startVideoStream() {
@@ -30,7 +31,8 @@ startVideoStream();
 // Start recording or capture photo
 $("#cameraButton").on("mousedown touchstart", function () {
   isHolding = true;
-  $("#timeCounter").text("0s");
+  $("#timeCounter").text(seconds + "/" + maxRecordingTime);
+  $(".progress circle").css("stroke-dashoffset", 314);
   timer = setTimeout(function () {
     if (isHolding) {
       startRecording();
@@ -66,7 +68,9 @@ function startRecording() {
 
   timer = setInterval(function () {
     seconds++;
-    $("#timeCounter").text(seconds + "s");
+    $("#timeCounter").text(seconds + "/" + maxRecordingTime);
+    const offset = 314 - (seconds / maxRecordingTime) * 314; // Calculate new offset
+    $(".progress circle").css("stroke-dashoffset", offset);
     if (seconds >= 20) {
       stopRecording();
     }
@@ -86,7 +90,11 @@ function stopRecording() {
     $("#videoElement").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
-    $("#closeDisplayButton").show(); 
+    $("#closeDisplayButton").show();
+    $(".progress circle").css("stroke-dashoffset", 314); // Reset progress
+    // $(".camera-container").hide()
+    $(".button-wrapper").hide();
+    $("#timeCounter").text("");
   };
 }
 
@@ -104,12 +112,13 @@ function capturePhoto() {
   $("#displayArea").html('<img src="' + imageURL + '" alt="Captured Image">');
   $("#videoElement").hide();
   $("#displayArea").show();
-  $("#closeDisplayButton").show(); 
+  $(".button-wrapper").hide();
+  $("#closeDisplayButton").show();
   $("#toggleCameraButton").hide();
 }
 
 $("#uploadButton").on("click", function () {
-  $("#fileInput").click(); 
+  $("#fileInput").click();
 });
 
 $("#fileInput").on("change", function () {
@@ -126,9 +135,9 @@ $("#fileInput").on("change", function () {
     $("#videoElement").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
-    $("#closeDisplayButton").show(); 
+    $("#closeDisplayButton").show();
   }
-  $("#fileInput").val(""); 
+  $("#fileInput").val("");
 });
 
 // Switch camera between front and rear
@@ -155,8 +164,9 @@ $("#toggleCameraButton").on("click", function () {
 
 // Close display button to hide display and show video again
 $("#closeDisplayButton").on("click", function () {
-  $(this).hide(); 
+  $(this).hide();
   $("#toggleCameraButton").show();
-  $("#displayArea").hide(); 
+  $("#displayArea").hide();
   $("#videoElement").show();
+  $(".button-wrapper").show();
 });
