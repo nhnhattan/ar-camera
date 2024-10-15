@@ -71,7 +71,7 @@ function startRecording() {
     $("#timeCounter").text(seconds + "/" + maxRecordingTime);
     const offset = 314 - (seconds / maxRecordingTime) * 314;
     $(".progress circle").css("stroke-dashoffset", offset);
-    if (seconds >= 20) {
+    if (seconds >= maxRecordingTime + 1) {
       stopRecording();
     }
   }, 1000);
@@ -125,11 +125,13 @@ $("#fileInput").on("change", function () {
   if (file) {
     const fileURL = URL.createObjectURL(file);
     if (file.type.startsWith("image/")) {
+      $("#displayArea").empty();
       $("#displayArea").html(
         '<img src="' + fileURL + '" alt="Uploaded Image">'
       );
     } else if (file.type.startsWith("video/")) {
-      $("#displayArea").html('<video autoplay src="' + fileURL + '"></video>');
+      $("#displayArea").empty();
+      $("#recorded").attr("src", fileURL);
     }
     $("#videoElement").hide();
     $("#displayArea").show();
