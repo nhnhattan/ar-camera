@@ -147,7 +147,6 @@ $("#switchCameraButton").on("click", function () {
   facingMode = facingMode === "user" ? "environment" : "user";
 
   if (stream) {
-    // Stop the current video stream
     stream.getTracks().forEach((track) => track.stop());
   }
 
