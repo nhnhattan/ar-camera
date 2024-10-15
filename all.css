@@ -73,6 +73,7 @@ body {
   transform: translate(-50%, -50%) rotate(-90deg); /* Center and rotate to start from the top */
   z-index: 1; /* Ensure circle is beneath the camera button */
   overflow: visible; /* Allow circle to show outside of container */
+  
 }
 
 .progress circle {
