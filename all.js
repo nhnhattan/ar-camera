@@ -37,7 +37,7 @@ $("#cameraButton").on("mousedown touchstart", function () {
     if (isHolding) {
       startRecording();
     }
-  }, 500);
+  }, 300);
 });
 
 // Stop recording or take a photo on button release
@@ -70,7 +70,11 @@ function startRecording() {
     seconds++;
     $("#timeCounter").text(seconds + "/" + maxRecordingTime);
     const offset = 314 - (seconds / maxRecordingTime) * 314;
-    $(".progress circle").css("stroke-dashoffset", offset);
+    $(".progress circle").css({
+      "stroke-dashoffset": 0,
+      transition: "stroke-dashoffset 20s linear",
+    });
+
     if (seconds >= maxRecordingTime + 1) {
       stopRecording();
     }

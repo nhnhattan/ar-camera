@@ -81,7 +81,7 @@ body {
   stroke-width: 12px; /* Stroke width */
   stroke-dasharray: 314; /* Circumference of the circle */
   stroke-dashoffset: 314; /* Start hidden */
-  transition: stroke-dashoffset 0.5s ease-in-out; /* Smooth transition */
+  transition: stroke-dashoffset 20s ease-in-out; /* Smooth transition */
 }
 
 @keyframes progress {
