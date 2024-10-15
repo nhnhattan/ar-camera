@@ -129,7 +129,7 @@ $("#fileInput").on("change", function () {
         '<img src="' + fileURL + '" alt="Uploaded Image">'
       );
     } else if (file.type.startsWith("video/")) {
-      $("#displayArea").html('<video controls src="' + fileURL + '"></video>');
+      $("#displayArea").html('<video autoplay src="' + fileURL + '"></video>');
     }
     $("#videoElement").hide();
     $("#displayArea").show();
