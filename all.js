@@ -136,6 +136,7 @@ $("#fileInput").on("change", function () {
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
     $("#closeDisplayButton").show();
+    $(".button-wrapper").hide();
   }
   $("#fileInput").val("");
 });
@@ -143,11 +144,11 @@ $("#fileInput").on("change", function () {
 // Switch camera between front and rear
 $("#switchCameraButton").on("click", function () {
   // Toggle between 'user' (front camera) and 'environment' (rear camera)
-  facingMode = (facingMode === 'user') ? 'environment' : 'user'; 
+  facingMode = facingMode === "user" ? "environment" : "user";
 
   if (stream) {
-      // Stop the current video stream
-      stream.getTracks().forEach(track => track.stop());
+    // Stop the current video stream
+    stream.getTracks().forEach((track) => track.stop());
   }
 
   // Restart video stream with the updated facing mode
