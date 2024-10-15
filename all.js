@@ -142,8 +142,25 @@ $("#fileInput").on("change", function () {
 
 // Switch camera between front and rear
 $("#switchCameraButton").on("click", function () {
-  facingMode = facingMode === "user" ? "environment" : "user"; // Toggle camera
-  startVideoStream(); // Restart video stream
+  facingMode = facingMode === "user" ? "environment" : "user";
+
+  if (stream) {
+    // Stop all tracks of the current stream
+    stream.getTracks().forEach((track) => track.stop());
+  }
+
+  // Restart the video stream with the new facing mode
+  navigator.mediaDevices
+    .getUserMedia({
+      video: { facingMode: facingMode },
+    })
+    .then(function (newStream) {
+      stream = newStream;
+      $("#videoElement")[0].srcObject = stream; // Set the new stream to the video element
+    })
+    .catch(function (error) {
+      console.log("Error switching camera: ", error);
+    });
 });
 
 // Toggle camera off and on
