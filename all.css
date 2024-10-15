@@ -118,6 +118,7 @@ body {
   transform: translateY(-50%);
   font-size: 18px;
   color: #fff;
+  user-select: none;
 }
 
 .button-wrapper {
@@ -134,6 +135,7 @@ body {
   height: 100vh;
   border: 2px solid #333;
   border-radius: 20px;
+  object-fit: cover;
 }
 
 .upload-button {
