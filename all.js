@@ -31,7 +31,7 @@ startVideoStream();
 // Start recording or capture photo
 $("#cameraButton").on("mousedown touchstart", function () {
   isHolding = true;
-  $("#timeCounter").text(seconds + "/" + maxRecordingTime);
+  $("#timeCounter").text("0" + "/" + maxRecordingTime);
   $(".progress circle").css("stroke-dashoffset", 314);
   timer = setTimeout(function () {
     if (isHolding) {

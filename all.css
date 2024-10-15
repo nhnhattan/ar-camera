@@ -106,8 +106,8 @@ body {
 
 .display img,
 .display video {
-  width: 60%;
-  height: auto;
+  width: 80%;
+  height: 100vh;
   object-fit: cover;
   position: relative;
 }
