@@ -9,6 +9,8 @@ let facingMode = "user"; // Default to user (front) camera
 let isCameraStopped = false;
 let isCameraTurnedOff = false;
 const maxRecordingTime = 20;
+const canvas = document.getElementById("Ar");
+const ctx = canvas.getContext("2d");
 
 // Function to start video stream
 function startVideoStream() {
@@ -18,7 +20,17 @@ function startVideoStream() {
     })
     .then(function (streamData) {
       stream = streamData;
-      $("#videoElement")[0].srcObject = stream;
+
+      const video = document.createElement("video"); // Create a hidden video element
+      video.srcObject = stream;
+      video.play();
+
+      // Draw video frames to canvas continuously
+      function drawCanvas() {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(drawCanvas); // Keep drawing frames
+      }
+      drawCanvas();
     })
     .catch(function (error) {
       console.log("Error accessing camera: ", error);
@@ -70,7 +82,7 @@ function startRecording() {
     seconds++;
     $("#timeCounter").text(seconds + "/" + maxRecordingTime);
     const offset = 314 - (seconds / maxRecordingTime) * 314;
-    $(".progress circle").css("stroke", "rgb(253, 0, 0)")
+    $(".progress circle").css("stroke", "rgb(253, 0, 0)");
     $(".progress circle").css({
       "stroke-dashoffset": 0,
       transition: "stroke-dashoffset 20s linear",
@@ -92,13 +104,13 @@ function stopRecording() {
     const videoBlob = new Blob(chunks, { type: "video/webm" });
     const videoURL = URL.createObjectURL(videoBlob);
     $("#displayArea").html('<video controls src="' + videoURL + '"></video>');
-    $("#videoElement").hide();
+    $("#Ar").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
     $("#closeDisplayButton").show();
 
     $(".progress circle").css("stroke-dashoffset", 314); // Reset progress
-    $(".progress circle").css("stroke", "none")
+    $(".progress circle").css("stroke", "none");
 
     $(".button-wrapper").hide();
     $("#timeCounter").text("");
@@ -108,16 +120,17 @@ function stopRecording() {
 // Capture photo
 function capturePhoto() {
   const canvas = document.createElement("canvas");
-  const videoElement = $("#videoElement")[0];
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
+  const Ar = $("#Ar")[0];
+  canvas.width = Ar.videoWidth;
+  canvas.height = Ar.videoHeight;
 
   const context = canvas.getContext("2d");
-  context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  context.drawImage(Ar, 0, 0, Ar.width, Ar.height);
 
-  const imageURL = canvas.toDataURL("image/png");
+  const imageURL = Ar.toDataURL("image/png");
+  console.log(imageURL)
   $("#displayArea").html('<img src="' + imageURL + '" alt="Captured Image">');
-  $("#videoElement").hide();
+  $("#Ar").hide();
   $("#displayArea").show();
   $(".button-wrapper").hide();
   $("#closeDisplayButton").show();
@@ -141,7 +154,7 @@ $("#fileInput").on("change", function () {
       $("#displayArea").empty();
       $("#recorded").attr("src", fileURL);
     }
-    $("#videoElement").hide();
+    $("#Ar").hide();
     $("#displayArea").show();
     $("#toggleCameraButton").hide();
     $("#closeDisplayButton").show();
@@ -172,7 +185,7 @@ $("#toggleCameraButton").on("click", function () {
   } else {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop()); // Stop camera
-      $("#videoElement")[0].srcObject = null;
+      $("#Ar")[0].srcObject = null;
     }
     $(this).html('<i class="fas fa-video-slash"></i>');
     isCameraTurnedOff = true;
@@ -184,6 +197,6 @@ $("#closeDisplayButton").on("click", function () {
   $(this).hide();
   $("#toggleCameraButton").show();
   $("#displayArea").hide();
-  $("#videoElement").show();
+  $("#Ar").show();
   $(".button-wrapper").show();
 });

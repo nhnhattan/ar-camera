@@ -17,7 +17,9 @@
         <button class="toggle-camera-button" id="toggleCameraButton">
           <i class="fas fa-video"></i>
         </button>
-        <video id="videoElement" autoplay></video>
+        <!-- <video id="videoElement" autoplay></video>   -->
+        <canvas id="Ar"></canvas>
+        <!-- <canvas id="Ar"></canvas>  -->
         <div class="button-wrapper">
           <button class="upload-button" id="uploadButton">
             <i class="fa-solid fa-file-import"></i>
@@ -39,6 +41,8 @@
       </div>
       <div class="display" id="displayArea" style="display: none;">
         <video id="recorded" controls autoplay></video>
+        <canvas id="canvasElement"></canvas>
+        
       </div>
       <button class="close-camera-button" id="closeDisplayButton">Close</button>
     </div>
