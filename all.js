@@ -128,11 +128,11 @@ function capturePhoto() {
   context.drawImage(Ar, 0, 0, Ar.width, Ar.height);
 
   const imageURL = Ar.toDataURL("image/png");
-  console.log(imageURL)
   $("#displayArea").html('<img src="' + imageURL + '" alt="Captured Image">');
   $("#Ar").hide();
   $("#displayArea").show();
   $(".button-wrapper").hide();
+  $("#timeCounter").text("");
   $("#closeDisplayButton").show();
   $("#toggleCameraButton").hide();
 }
