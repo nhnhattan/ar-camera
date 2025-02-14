@@ -12,28 +12,41 @@ const maxRecordingTime = 20;
 const canvas = document.getElementById("Ar");
 const ctx = canvas.getContext("2d");
 
-// Function to start video stream
 function startVideoStream() {
   navigator.mediaDevices
     .getUserMedia({
-      video: { facingMode: facingMode },
+      video: {
+        facingMode: facingMode,
+        width: { ideal: 1920 }, 
+        height: { ideal: 1080 },
+        frameRate: { ideal: 30 },
+      },
     })
-    .then(function (streamData) {
+    .then(async function (streamData) {
       stream = streamData;
 
-      const video = document.createElement("video"); // Create a hidden video element
+      const video = document.createElement("video");
       video.srcObject = stream;
-      video.play();
+      video.setAttribute("playsinline", "true"); 
+      await video.play();
 
-      // Draw video frames to canvas continuously
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      const [track] = stream.getVideoTracks();
+      const capabilities = track.getCapabilities();
+      if (capabilities.focusMode) {
+        track.applyConstraints({ advanced: [{ focusMode: "continuous" }] });
+      }
+
       function drawCanvas() {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        requestAnimationFrame(drawCanvas); // Keep drawing frames
+        requestAnimationFrame(drawCanvas);
       }
       drawCanvas();
     })
     .catch(function (error) {
-      console.log("Error accessing camera: ", error);
+      console.error("Lỗi camera: ", error);
     });
 }
 

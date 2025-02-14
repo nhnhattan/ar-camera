@@ -6,6 +6,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
   background-color: #333; /* Dark background for better contrast */
   color: #fff; /* White text color */
   overflow: hidden; /* Prevent scrollbars */
@@ -16,7 +17,8 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100vw; 
+  justify-content: center;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -64,8 +66,10 @@ body {
   color: black;
 }
 
-
-.camera-button:focus, .camera-button:active, .camera-container:focus, .camera-container:active {
+.camera-button:focus,
+.camera-button:active,
+.camera-container:focus,
+.camera-container:active {
   outline: none;
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
@@ -80,7 +84,6 @@ body {
   transform: translate(-50%, -50%) rotate(-90deg); /* Center and rotate to start from the top */
   z-index: 1; /* Ensure circle is beneath the camera button */
   overflow: visible; /* Allow circle to show outside of container */
-  
 }
 
 .progress circle {
@@ -136,10 +139,13 @@ body {
   bottom: 10%;
 }
 
-#Ar, #videoElement, #canvasElement {
-  width: 100vw;
-  height: 100vh;
+#Ar,
+#videoElement,
+#canvasElement {
+  width: 80vw;
+  height: 90vh;
   object-fit: cover;
+  border-radius: 1rem;
 }
 
 #canvasElement {
@@ -222,4 +228,11 @@ body {
 
 #closeDisplayButton:hover {
   background-color: rgb(109, 1, 1);
+}
+
+@media (max-width: 729px) {
+  #Ar {
+    width: 100vw;
+    height: 100vh;
+  }
 }
